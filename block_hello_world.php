@@ -24,7 +24,6 @@ defined('MOODLE_INTERNAL') || die();
  * @author      benIT <benoit.works@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class block_hello_world extends block_base
 {
     /**
@@ -34,4 +33,21 @@ class block_hello_world extends block_base
     {
         $this->title = get_string('pluginname', 'block_hello_world');
     }
+
+    public function get_content()
+    {
+        if ($this->content !== NULL) {
+            return $this->content;
+        }
+
+        if (!isloggedin() or isguestuser()) {
+            return '';      // Never useful unless you are logged in as real users
+        }
+
+        $this->content = new stdClass;
+        $this->content->text = '<h2>Hello world !</h2><p>This is some content</p>';
+        $this->content->footer = '<h2>Here is the footer !</h2><p>what a beautiful footer !</p>';
+    }
+
+
 }
