@@ -34,19 +34,21 @@ class block_hello_world extends block_base
         $this->title = get_string('pluginname', 'block_hello_world');
     }
 
+    /**
+     * set up the block content.
+     * This variable holds all the actual content that is displayed inside each block. Valid values for it are either NULL or an object of class stdClass, which must have specific member variables set as explained below. Normally, it begins life with a value of NULL and it becomes fully constructed (i.e., an object) when get_content() is called.
+     * @link https://docs.moodle.org/dev/Blocks/Appendix_A#.24this-.3Econtent
+     * @return stdObject
+     */
     public function get_content()
     {
         if ($this->content !== NULL) {
             return $this->content;
         }
-
-        if (!isloggedin() or isguestuser()) {
-            return '';      // Never useful unless you are logged in as real users
-        }
-
         $this->content = new stdClass;
-        $this->content->text = '<h2>Hello world !</h2><p>This is some content</p>';
-        $this->content->footer = '<h2>Here is the footer !</h2><p>what a beautiful footer !</p>';
+        $this->content->text = $this->config->text ? $this->config->text : '<h4>Hello world default text</h4>';
+        $this->content->footer = '<p><i>hello world footer</i></p>';
+        return $this->content;
     }
 
 
