@@ -19,19 +19,19 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * a basic hello world block plugin
  * @package     block
- * @subpackage  hello_world
+ * @subpackage  helloworld
  * @copyright   2017 benIT
  * @author      benIT <benoit.works@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_hello_world extends block_base
+class block_helloworld extends block_base
 {
     /**
      * block initializations
      */
     public function init()
     {
-        $this->title = get_string('pluginname', 'block_hello_world');
+        $this->title = get_string('pluginname', 'block_helloworld');
     }
 
     /**
@@ -55,14 +55,14 @@ class block_hello_world extends block_base
     {
         if ($this->config) {
             //let's set up the block title
-            $this->title = $this->config->title ? $this->config->title : get_string('hello_world:defaultblocktitle', 'block_hello_world');
+            $this->title = $this->config->title ? $this->config->title : get_string('helloworld:defaultblocktitle', 'block_helloworld');
         }
     }
 
     public function html_attributes()
     {
         $attributes = parent::html_attributes();
-        if (get_config('hello_world', 'Colored_Text')) {
+        if (get_config('helloworld', 'Colored_Text')) {
             $attributes['class'] .= ' colored-text';
         }
         return $attributes;

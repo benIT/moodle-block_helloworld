@@ -17,7 +17,7 @@
 /**
  * hello world block plugin capabilities
  * @package     block
- * @subpackage  hello_world
+ * @subpackage  helloworld
  * @copyright   2017
  * @author      benIT <benoit.works@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
 
-    'block/hello_world:myaddinstance' => array(
+    'block/helloworld:myaddinstance' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -36,7 +36,7 @@ $capabilities = array(
         'clonepermissionsfrom' => 'moodle/my:manageblocks'
     ),
 
-    'block/hello_world:addinstance' => array(
+    'block/helloworld:addinstance' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
 
         'captype' => 'write',

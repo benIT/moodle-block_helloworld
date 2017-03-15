@@ -14,7 +14,7 @@ That was it ! You can now add a hello world block.
 Connect as an admin and add a "hello world" block. Once added, you can configure your block settings. 
 
 ### Global configuration 
-* The global configuration of the block is available at : *https://localhost/admin/settings.php?section=blocksettinghello_world*
+* The global configuration of the block is available at : *https://localhost/admin/settings.php?section=blocksettinghelloworld*
 
 ## Ressources
 * [Moodle programming course](https://www.youtube.com/playlist?list=PLgfLVzXXIo5q10qVXDVyD-JZVyZL9pCq0)

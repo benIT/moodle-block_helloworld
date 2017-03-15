@@ -16,7 +16,7 @@
 /**
  * global settings for admin of hello world block plugin
  * @package     block
- * @subpackage  hello_world
+ * @subpackage  helloworld
  * @copyright   2017 benIT
  * @author      benIT <benoit.works@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,13 +25,13 @@
 
 $settings->add(new admin_setting_heading(
     'headerconfig',
-    get_string('hello_world:headerconfig', 'block_hello_world'),
-    get_string('hello_world:descconfig', 'block_hello_world')
+    get_string('helloworld:headerconfig', 'block_helloworld'),
+    get_string('helloworld:descconfig', 'block_helloworld')
 ));
 
 $settings->add(new admin_setting_configcheckbox(
-    'hello_world/Colored_Text',
-    get_string('hello_world:labelcoloredtext', 'block_hello_world'),
-    get_string('hello_world:desccoloredtext', 'block_hello_world'),
+    'helloworld/Colored_Text',
+    get_string('helloworld:labelcoloredtext', 'block_helloworld'),
+    get_string('helloworld:desccoloredtext', 'block_helloworld'),
     '0'
 ));

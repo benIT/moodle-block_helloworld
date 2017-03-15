@@ -16,18 +16,18 @@
 /**
  * en language file
  * @package     block
- * @subpackage  hello_world
+ * @subpackage  helloworld
  * @copyright   2017 benIT
  * @author      benIT <benoit.works@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['pluginname'] = 'hello world';
-$string['hello_world:addinstance'] = 'Add a hello world block';
-$string['hello_world:myaddinstance'] = 'Add a hello world block to Dashboard';
-$string['hello_world:contentinputlabel'] = 'Hello world block content';
-$string['hello_world:titleinputlabel'] = 'Hello world block title';
-$string['hello_world:defaultblocktitle'] = 'Hello world default title';
-$string['hello_world:headerconfig'] = 'Hello world global configuration';
-$string['hello_world:descconfig'] = 'Here is the global configuration of the hello world block';
-$string['hello_world:labelcoloredtext'] = 'Colored text ?';
-$string['hello_world:desccoloredtext'] = 'This will enabled a colored text for the block';
+$string['helloworld:addinstance'] = 'Add a hello world block';
+$string['helloworld:myaddinstance'] = 'Add a hello world block to Dashboard';
+$string['helloworld:contentinputlabel'] = 'Hello world block content';
+$string['helloworld:titleinputlabel'] = 'Hello world block title';
+$string['helloworld:defaultblocktitle'] = 'Hello world default title';
+$string['helloworld:headerconfig'] = 'Hello world global configuration';
+$string['helloworld:descconfig'] = 'Here is the global configuration of the hello world block';
+$string['helloworld:labelcoloredtext'] = 'Colored text ?';
+$string['helloworld:desccoloredtext'] = 'This will enabled a colored text for the block';

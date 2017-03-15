@@ -17,12 +17,12 @@
 /**
  * configuration form of hello world block
  * @package     block
- * @subpackage  hello_world
+ * @subpackage  helloworld
  * @copyright   2017 benIT
  * @author      benIT <benoit.works@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_hello_world_edit_form extends block_edit_form
+class block_helloworld_edit_form extends block_edit_form
 {
 
     protected function specific_definition($mform)
@@ -32,11 +32,11 @@ class block_hello_world_edit_form extends block_edit_form
         $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
 
         // A sample string variable with a default value.
-        $mform->addElement('text', 'config_text', get_string('hello_world:contentinputlabel', 'block_hello_world'));
+        $mform->addElement('text', 'config_text', get_string('helloworld:contentinputlabel', 'block_helloworld'));
         $mform->setDefault('config_text', 'default value');
         $mform->setType('config_text', PARAM_RAW);
 
-        $mform->addElement('text', 'config_title', get_string('hello_world:titleinputlabel', 'block_hello_world'));
+        $mform->addElement('text', 'config_title', get_string('helloworld:titleinputlabel', 'block_helloworld'));
         $mform->setDefault('config_title', 'default value');
         $mform->setType('config_title', PARAM_TEXT);
 
