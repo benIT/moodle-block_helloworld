@@ -51,5 +51,18 @@ class block_hello_world extends block_base
         return $this->content;
     }
 
+    public function specialization()
+    {
+        if ($this->config) {
+            //let's set up the block title
+            $this->title = $this->config->title ? $this->config->title : get_string('hello_world:defaultblocktitle', 'block_hello_world');
+        }
+    }
+
+    public function instance_allow_multiple()
+    {
+        return true;
+    }
+
 
 }

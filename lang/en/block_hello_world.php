@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * language file
+ * en language file
  * @package     block
  * @subpackage  hello_world
  * @copyright   2017 benIT
@@ -25,3 +25,5 @@ $string['pluginname'] = 'hello world';
 $string['hello_world:addinstance'] = 'Add a hello world block';
 $string['hello_world:myaddinstance'] = 'Add a hello world block to Dashboard';
 $string['hello_world:contentinputlabel'] = 'Hello world block content';
+$string['hello_world:titleinputlabel'] = 'Hello world block title';
+$string['hello_world:hello_world:defaultblocktitle'] = 'Hello world default title';
