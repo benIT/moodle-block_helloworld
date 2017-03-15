@@ -4,7 +4,8 @@
 This repo is a basic block hello world plugin. This can be used as a template for MOODLE block plugin development.
 
 ## Installation
-* clone this repo to the *blocks* folder of your moodle installation
+* clone this repo and rename it *helloworld*
+* move the *helloworld* folder to the *blocks* folder of your moodle installation
 * go to the admin page to enable the plugin, e.g. *https://localhost/admin/index.php*
 
 That was it ! You can now add a hello world block.
