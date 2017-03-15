@@ -11,4 +11,5 @@ That was it ! You can now add a hello world block.
 
 ## Ressources
 * [Moodle programming course](https://www.youtube.com/playlist?list=PLgfLVzXXIo5q10qVXDVyD-JZVyZL9pCq0)
-* [Moodle official dev page](https://docs.moodle.org/dev/Main_Page)
+* [Moodle official dev main page](https://docs.moodle.org/dev/Main_Page)
+* [Moodle official dev block page](https://docs.moodle.org/dev/Blocks)
