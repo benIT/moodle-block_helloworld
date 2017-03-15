@@ -59,7 +59,21 @@ class block_hello_world extends block_base
         }
     }
 
+    public function html_attributes()
+    {
+        $attributes = parent::html_attributes();
+        if (get_config('hello_world', 'Colored_Text')) {
+            $attributes['class'] .= ' colored-text';
+        }
+        return $attributes;
+    }
+
     public function instance_allow_multiple()
+    {
+        return true;
+    }
+
+    public function has_config()
     {
         return true;
     }

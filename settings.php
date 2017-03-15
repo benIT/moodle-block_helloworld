@@ -14,21 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * en language file
+ * global settings for admin of hello world block plugin
  * @package     block
  * @subpackage  hello_world
  * @copyright   2017 benIT
  * @author      benIT <benoit.works@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$string['pluginname'] = 'hello world';
-$string['hello_world:addinstance'] = 'Add a hello world block';
-$string['hello_world:myaddinstance'] = 'Add a hello world block to Dashboard';
-$string['hello_world:contentinputlabel'] = 'Hello world block content';
-$string['hello_world:titleinputlabel'] = 'Hello world block title';
-$string['hello_world:defaultblocktitle'] = 'Hello world default title';
-$string['hello_world:headerconfig'] = 'Hello world global configuration';
-$string['hello_world:descconfig'] = 'Here is the global configuration og the Hello world plugin';
-$string['hello_world:labelcoloredtext'] = 'Colored text ?';
-$string['hello_world:desccoloredtext'] = 'This will enabled a colored text for the plugin';
 
+
+$settings->add(new admin_setting_heading(
+    'headerconfig',
+    get_string('hello_world:headerconfig', 'block_hello_world'),
+    get_string('hello_world:descconfig', 'block_hello_world')
+));
+
+$settings->add(new admin_setting_configcheckbox(
+    'hello_world/Colored_Text',
+    get_string('hello_world:labelcoloredtext', 'block_hello_world'),
+    get_string('hello_world:desccoloredtext', 'block_hello_world'),
+    '0'
+));
