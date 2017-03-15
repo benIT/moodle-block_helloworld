@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * en language file
+ * fr language file
  * @package     block
  * @subpackage  hello_world
  * @copyright   2017 benIT
@@ -22,12 +22,13 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['pluginname'] = 'hello world';
-$string['hello_world:addinstance'] = 'Add a hello world block';
-$string['hello_world:myaddinstance'] = 'Add a hello world block to Dashboard';
-$string['hello_world:contentinputlabel'] = 'Hello world block content';
-$string['hello_world:titleinputlabel'] = 'Hello world block title';
-$string['hello_world:defaultblocktitle'] = 'Hello world default title';
-$string['hello_world:headerconfig'] = 'Hello world global configuration';
-$string['hello_world:descconfig'] = 'Here is the global configuration of the hello world block';
-$string['hello_world:labelcoloredtext'] = 'Colored text ?';
-$string['hello_world:desccoloredtext'] = 'This will enabled a colored text for the block';
+$string['hello_world:addinstance'] = 'Ajouter un bloc hello world';
+$string['hello_world:myaddinstance'] = 'Ajouter un bloc hello world au dashboard';
+$string['hello_world:contentinputlabel'] = 'Contenu du bloc world';
+$string['hello_world:titleinputlabel'] = 'Titre du bloc world';
+$string['hello_world:defaultblocktitle'] = 'Titre par défaut du bloc world';
+$string['hello_world:headerconfig'] = 'Configuration globale du bloc hello world';
+$string['hello_world:descconfig'] = 'Configuration globale du bloc hello world';
+$string['hello_world:labelcoloredtext'] = 'Texte coloré ?';
+$string['hello_world:desccoloredtext'] = 'Active un texte coloré pour le bloc hello world';
+
