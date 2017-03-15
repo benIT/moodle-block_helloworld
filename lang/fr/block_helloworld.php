@@ -27,8 +27,10 @@ $string['helloworld:myaddinstance'] = 'Ajouter un bloc hello world au dashboard'
 $string['helloworld:contentinputlabel'] = 'Contenu du bloc world';
 $string['helloworld:titleinputlabel'] = 'Titre du bloc world';
 $string['helloworld:defaultblocktitle'] = 'Titre par défaut du bloc world';
+$string['helloworld:defaultblocktext'] = 'Hello world texte par défaut';
+$string['helloworld:defaultblockfooter'] = 'Hello world footer';
 $string['helloworld:headerconfig'] = 'Configuration globale du bloc hello world';
 $string['helloworld:descconfig'] = 'Configuration globale du bloc hello world';
 $string['helloworld:labelcoloredtext'] = 'Texte coloré ?';
 $string['helloworld:desccoloredtext'] = 'Active un texte coloré pour le bloc hello world';
-
+$string['helloworld:typeatext'] = 'Saisir un texte';

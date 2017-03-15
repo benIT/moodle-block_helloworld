@@ -46,8 +46,8 @@ class block_helloworld extends block_base
             return $this->content;
         }
         $this->content = new stdClass;
-        $this->content->text = $this->config->text ? $this->config->text : '<h4>Hello world default text</h4>';
-        $this->content->footer = '<p><i>hello world footer</i></p>';
+        $this->content->text = $this->config->text ? $this->config->text : '<h4>'.get_string('helloworld:defaultblocktext','block_helloworld').'</h4>';
+        $this->content->footer = '<p><i>'.get_string('helloworld:defaultblockfooter','block_helloworld').'</i></p>';
         return $this->content;
     }
 
