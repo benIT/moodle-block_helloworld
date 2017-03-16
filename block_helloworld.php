@@ -42,12 +42,15 @@ class block_helloworld extends block_base
      */
     public function get_content()
     {
+        global $COURSE ;
         if ($this->content !== NULL) {
             return $this->content;
         }
         $this->content = new stdClass;
         $this->content->text = $this->config->text ? $this->config->text : '<h4>'.get_string('helloworld:defaultblocktext','block_helloworld').'</h4>';
-        $this->content->footer = '<p><i>'.get_string('helloworld:defaultblockfooter','block_helloworld').'</i></p>';
+//        $this->content->footer = '<p><i>'.get_string('helloworld:defaultblockfooter','block_helloworld').'</i></p>';
+        $url = new moodle_url('/blocks/helloworld/view.php', array('blockid' => $this->instance->id, 'courseid' => $COURSE->id));
+        $this->content->footer = html_writer::link($url, get_string('addpage', 'block_simplehtml'));
         return $this->content;
     }
 
