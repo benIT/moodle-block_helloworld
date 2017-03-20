@@ -46,7 +46,7 @@ function block_helloworld_print_page($helloworld, $return = false)
 //        $display .= $images[$helloworld->filename];
         $display .= $helloworld->filename;
         $display .= html_writer::start_tag('p');
-        $display .= clean_text($helloworld->description);
+        $display .= clean_text($helloworld->text);
         $display .= html_writer::end_tag('p');
         $display .= $OUTPUT->box_end();
     }

@@ -43,37 +43,59 @@ class block_helloworld extends block_base
     public function get_content()
     {
         global $COURSE, $DB, $PAGE;
-        $canmanage = $PAGE->user_is_editing($this->instance->id);
+        $context = context_course::instance($COURSE->id);
+        // Check to see if we are in editing mode and that we can manage pages.
+        $canmanage = has_capability('block/helloworld:managepages', $context) && $PAGE->user_is_editing($this->instance->id);
+        $canview = has_capability('block/helloworld:viewpages', $context);
         if ($this->content !== NULL) {
             return $this->content;
         }
         $this->content = new stdClass;
-        if ($helloworldpages = $DB->get_records('block_helloworld', array('blockid' => $this->instance->id))) {
-            $this->content->text .= html_writer::start_tag('ul');
-            foreach ($helloworldpages as $helloworldpage) {
-                if ($canmanage) {
-                    $pageparam = array('blockid' => $this->instance->id,
-                        'courseid' => $COURSE->id,
-                        'id' => $helloworldpage->id);
-                    $editurl = new moodle_url('/blocks/helloworld/view.php', $pageparam);
-                    $editpicurl = new moodle_url('/pix/t/edit.png');
-                    $edit = html_writer::link($editurl, html_writer::tag('img', '', array('src' => $editpicurl, 'alt' => get_string('edit'))));
-                } else {
-                    $edit = '';
-                }
-                $pageurl = new moodle_url('/blocks/helloworld/view.php', array('blockid' => $this->instance->id, 'courseid' => $COURSE->id, 'id' => $helloworldpage->id, 'viewpage' => true));
-                $this->content->text .= html_writer::start_tag('li');
-                $this->content->text .= html_writer::link($pageurl, $helloworldpage->title);
-                $this->content->text .= $edit;
-                $this->content->text .= html_writer::end_tag('li');
-            }
+        $helloworldpages = $DB->get_records('block_helloworld', array('blockid' => $this->instance->id));
+        $helloworldpage = $helloworldpages[array_rand($helloworldpages)];
+
+        $url = new moodle_url('/blocks/helloworld/view.php', array('blockid' => $this->instance->id, 'courseid' => $COURSE->id));
+
+        $this->content->text .= html_writer::start_tag('h2');
+        $this->content->text .= $helloworldpage->title;
+        $this->content->text .= html_writer::end_tag('h2');
+
+        $this->content->text .= html_writer::start_tag('p');
+        $this->content->text .= $helloworldpage->text;
+        $this->content->text .= $helloworldpage->filename;
+        $this->content->text .= html_writer::end_tag('p');
+        $this->content->text .= html_writer::start_tag('p');
+        $this->content->text .= userdate($helloworldpage->date);
+        $this->content->text .= html_writer::end_tag('p');
+
+
+        $fs = get_file_storage();
+//        $fs->get_file_by_id(27);
+//        $fs->get_file_by_id(716737728);
+
+
+        if (has_capability('block/helloworld:managepages', $context)) {
+            $url = new moodle_url('/blocks/helloworld/view.php', array('blockid' => $this->instance->id, 'courseid' => $COURSE->id));
+            $add = new moodle_url('/pix/t/add.png');
+            $this->content->footer = html_writer::link($url, html_writer::tag('img', '', array('src' => $add, 'alt' => get_string('add'))));
+            $pageparam = array('blockid' => $this->instance->id,
+                'courseid' => $COURSE->id,
+                'id' => $helloworldpage->id);
+            $editurl = new moodle_url('/blocks/helloworld/view.php', $pageparam);
+            $editpicurl = new moodle_url('/pix/t/edit.png');
+            $edit = html_writer::link($editurl, html_writer::tag('img', '', array('src' => $editpicurl, 'alt' => get_string('edit'))));
+
+            //delete
+            $deleteparam = array('id' => $helloworldpage->id, 'courseid' => $COURSE->id);
+            $deleteurl = new moodle_url('/blocks/helloworld/delete.php', $deleteparam);
+            $deletepicurl = new moodle_url('/pix/t/delete.png');
+            $delete = html_writer::link($deleteurl, html_writer::tag('img', '', array('src' => $deletepicurl, 'alt' => get_string('delete'))));
+            $this->content->footer .= $edit;
+            $this->content->footer .= $delete;
+        } else {
+            $this->content->footer = '';
         }
 
-
-//        $this->content->text = $this->config->text ? $this->config->text : '<h4>'.get_string('helloworld:defaultblocktext','block_helloworld').'</h4>';
-//        $this->content->footer = '<p><i>'.get_string('helloworld:defaultblockfooter','block_helloworld').'</i></p>';
-        $url = new moodle_url('/blocks/helloworld/view.php', array('blockid' => $this->instance->id, 'courseid' => $COURSE->id));
-        $this->content->footer = html_writer::link($url, get_string('addpage', 'block_helloworld'));
         return $this->content;
     }
 
@@ -104,5 +126,10 @@ class block_helloworld extends block_base
         return true;
     }
 
+    public function instance_delete()
+    {
+        global $DB;
+        $DB->delete_records('block_helloworld', array('blockid' => $this->instance->id));
+    }
 
 }

@@ -31,7 +31,6 @@ class helloworld_form extends moodleform
     function definition()
     {
         $mform =& $this->_form;
-        $mform->addElement('hidden','id','0');
         $mform->addElement('header', 'displayinfo', get_string('textfields', 'block_helloworld'));
 
         $mform->addElement('text', 'title', get_string('title', 'block_helloworld'));
@@ -41,13 +40,19 @@ class helloworld_form extends moodleform
         $mform->addElement('htmleditor', 'text', get_string('displayedhtml', 'block_helloworld'));
         $mform->setType('text', PARAM_RAW);
         $mform->addRule('text', null, 'required', null, 'client');
+
         $mform->addElement('filepicker', 'filename', get_string('file'), null, array('accepted_types' => '*'));
 
         $mform->addElement('header', 'optional', get_string('optional', 'form'), null, false);
-        $mform->addElement('date_time_selector', 'date', get_string('date', 'block_helloworld'), array('optional' => true));
+        $mform->addElement('date_time_selector', 'date', get_string('date'), array('optional' => true));
         $mform->setAdvanced('optional');
+
+        $mform->addElement('hidden','id','0');
+
         $mform->addElement('hidden', 'blockid');
+
         $mform->addElement('hidden', 'courseid');
+
         $this->add_action_buttons();
 
     }

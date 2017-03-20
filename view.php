@@ -45,6 +45,7 @@ if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourse', 'block_helloworld', $courseid);
 }
 require_login($course);
+require_capability('block/helloworld:managepages', context_course::instance($courseid));
 $PAGE->set_url('/blocks/helloworld/view.php', array('id' => $courseid));
 $PAGE->set_pagelayout('standard');
 $PAGE->set_heading(get_string('edithtml', 'block_helloworld'));
