@@ -23,6 +23,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once("{$CFG->libdir}/formslib.php");
+require_once($CFG->dirroot.'/blocks/helloworld/lib.php');
 
 class helloworld_form extends moodleform
 {
@@ -42,7 +43,7 @@ class helloworld_form extends moodleform
         $mform->addElement('filepicker', 'filename', get_string('file'), null, array('accepted_types' => '*'));
 
         $mform->addElement('header', 'optional', get_string('optional', 'form'), null, false);
-        $mform->addElement('date_time_selector', 'displaydate', get_string('displaydate', 'block_helloworld'), array('optional' => true));
+        $mform->addElement('date_time_selector', 'date', get_string('date', 'block_helloworld'), array('optional' => true));
         $mform->setAdvanced('optional');
         $mform->addElement('hidden', 'blockid');
         $mform->addElement('hidden', 'courseid');
