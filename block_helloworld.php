@@ -42,7 +42,8 @@ class block_helloworld extends block_base
      */
     public function get_content()
     {
-        global $COURSE, $DB;
+        global $COURSE, $DB, $PAGE;
+        $canmanage = $PAGE->user_is_editing($this->instance->id);
         if ($this->content !== NULL) {
             return $this->content;
         }
@@ -50,12 +51,22 @@ class block_helloworld extends block_base
         if ($helloworldpages = $DB->get_records('block_helloworld', array('blockid' => $this->instance->id))) {
             $this->content->text .= html_writer::start_tag('ul');
             foreach ($helloworldpages as $helloworldpage) {
-                $pageurl = new moodle_url('/blocks/helloworld/view.php', array('blockid' => $this->instance->id, 'courseid' => $COURSE->id, 'id' => $helloworldpage->id, 'viewpage' => '1'));
+                if ($canmanage) {
+                    $pageparam = array('blockid' => $this->instance->id,
+                        'courseid' => $COURSE->id,
+                        'id' => $helloworldpage->id);
+                    $editurl = new moodle_url('/blocks/helloworld/view.php', $pageparam);
+                    $editpicurl = new moodle_url('/pix/t/edit.png');
+                    $edit = html_writer::link($editurl, html_writer::tag('img', '', array('src' => $editpicurl, 'alt' => get_string('edit'))));
+                } else {
+                    $edit = '';
+                }
+                $pageurl = new moodle_url('/blocks/helloworld/view.php', array('blockid' => $this->instance->id, 'courseid' => $COURSE->id, 'id' => $helloworldpage->id, 'viewpage' => true));
                 $this->content->text .= html_writer::start_tag('li');
                 $this->content->text .= html_writer::link($pageurl, $helloworldpage->title);
+                $this->content->text .= $edit;
                 $this->content->text .= html_writer::end_tag('li');
             }
-            $this->content->text .= html_writer::end_tag('ul');
         }
 
 

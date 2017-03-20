@@ -30,6 +30,7 @@ function block_helloworld_images()
 
 function block_helloworld_print_page($helloworld, $return = false)
 {
+//    todo :enhance rendering
     global $OUTPUT, $COURSE;
     $display = $OUTPUT->heading($helloworld->title);
     $display .= $OUTPUT->box_start();

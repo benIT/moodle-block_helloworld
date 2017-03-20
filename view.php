@@ -52,6 +52,8 @@ $PAGE->set_heading(get_string('edithtml', 'block_helloworld'));
 $helloworld = new helloworld_form();
 $toform['blockid'] = $blockid;
 $toform['courseid'] = $courseid;
+$toform['id'] = $id;
+
 $helloworld->set_data($toform);
 if ($helloworld->is_cancelled()) {
     // Cancelled forms redirect to the course main page.
@@ -59,27 +61,33 @@ if ($helloworld->is_cancelled()) {
     redirect($courseurl);
 } else if ($fromform = $helloworld->get_data()) {
     // We need to add code to appropriately act on and store the submitted data
-    // but for now we will just redirect back to the course main page.
-    if (!$DB->insert_record('block_helloworld', $fromform)) {
-        print_error('inserterror', 'block_helloworld');
+    if ($fromform->id != 0) {
+        if (!$DB->update_record('block_helloworld', $fromform)) {
+            print_error('updateerror', 'block_helloworld');
+        }
+    } else {
+        if (!$DB->insert_record('block_helloworld', $fromform)) {
+            print_error('inserterror', 'block_helloworld');
+        }
     }
     $courseurl = new moodle_url('/course/view.php', array('id' => $courseid));
     redirect($courseurl);
 } else {
     // form didn't validate or this is the first display
     $site = get_site();
-//    echo $OUTPUT->header();
-//    $helloworld->display();
-//    echo $OUTPUT->footer();
     echo $OUTPUT->header();
-    if ($viewpage) {
+    if ($id) {
         $helloworldpage = $DB->get_record('block_helloworld', array('id' => $id));
-        block_helloworld_print_page($helloworldpage);
+        if ($viewpage) { //read only mode
+            block_helloworld_print_page($helloworldpage);
+        } else {
+            $helloworld->set_data($helloworldpage);
+            $helloworld->display();
+        }
     } else {
         $helloworld->display();
     }
     echo $OUTPUT->footer();
-
 
 
 }

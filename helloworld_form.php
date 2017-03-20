@@ -31,6 +31,7 @@ class helloworld_form extends moodleform
     function definition()
     {
         $mform =& $this->_form;
+        $mform->addElement('hidden','id','0');
         $mform->addElement('header', 'displayinfo', get_string('textfields', 'block_helloworld'));
 
         $mform->addElement('text', 'title', get_string('title', 'block_helloworld'));
