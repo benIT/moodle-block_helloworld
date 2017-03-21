@@ -24,7 +24,10 @@
  */
 
 require_once('../../config.php');
-
+global $PAGE;
+$context = context_system::instance();
+$PAGE->set_context($context);
+$PAGE->set_pagelayout('standard');
 $courseid = required_param('courseid', PARAM_INT);
 $id = optional_param('id', 0, PARAM_INT);
 $confirm = optional_param('confirm', 0, PARAM_INT);
@@ -35,20 +38,34 @@ if (!$course = $DB->get_record('course', array('id' => $courseid))) {
 
 require_login($course);
 require_capability('block/helloworld:managepages', context_course::instance($courseid));
-if(! $helloworldpage = $DB->get_record('block_helloworld', array('id' => $id))) {
+if (!$helloworldpage = $DB->get_record('block_helloworld', array('id' => $id))) {
     print_error('nopage', 'block_helloworld', '', $id);
 }
-
 $site = get_site();
-$PAGE->set_url('/blocks/helloworld/view.php', array('id' => $id, 'courseid' => $courseid));
-$heading = $site->fullname . ' :: ' . $course->shortname . ' :: ' . $helloworldpage->pagetitle;
-$PAGE->set_heading($heading);
+$PAGE->set_url('/blocks/helloworld/delete.php', array('id' => $id, 'courseid' => $courseid));
+$PAGE->set_heading($site->fullname . ' :: ' . $course->shortname . ' :: ' . $helloworldpage->title);
+echo $OUTPUT->header();
 if (!$confirm) {
     $optionsno = new moodle_url('/course/view.php', array('id' => $courseid));
     $optionsyes = new moodle_url('/blocks/helloworld/delete.php', array('id' => $id, 'courseid' => $courseid, 'confirm' => 1, 'sesskey' => sesskey()));
-    echo $OUTPUT->confirm(get_string('deletepage', 'block_helloworld', $helloworldpage->pagetitle), $optionsyes, $optionsno);
+    echo $OUTPUT->confirm(get_string('deleteitem', 'block_helloworld', $helloworldpage->title, true), $optionsyes, $optionsno);
 } else {
     if (confirm_sesskey()) {
+        $helloworldpage = $DB->get_record('block_helloworld', array('id' => $id));
+        $fs = get_file_storage();
+        $fileinfo = array(
+            'component' => 'block_helloworld',
+            'filearea' => 'attachment',     // usually = table name
+            'itemid' => $helloworldpage->attachment,               // usually = ID of row in table
+            'contextid' => $context->id, // ID of context
+            'filepath' => '/',           // any path beginning and ending in /
+            'filename' => ''); // any filename
+
+        // Get file
+        $file = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename']);
+        if ($file) {
+            $file->delete();
+        }
         if (!$DB->delete_records('block_helloworld', array('id' => $id))) {
             print_error('deleteerror', 'block_helloworld');
         }
@@ -58,9 +75,5 @@ if (!$confirm) {
     $url = new moodle_url('/course/view.php', array('id' => $courseid));
     redirect($url);
 }
-
-
-
-
-echo $OUTPUT->header();
 echo $OUTPUT->footer();
+

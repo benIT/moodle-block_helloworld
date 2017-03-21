@@ -21,16 +21,31 @@
  * @author      benIT <benoit.works@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+//helloworld/block_helloworld.php
 $string['pluginname'] = 'hello world';
-$string['helloworld:addinstance'] = 'Add a hello world block';
-$string['helloworld:myaddinstance'] = 'Add a hello world block to Dashboard';
-$string['helloworld:contentinputlabel'] = 'Hello world block content';
-$string['helloworld:titleinputlabel'] = 'Hello world block title';
-$string['helloworld:defaultblocktitle'] = 'Hello world default title';
-$string['helloworld:defaultblocktext'] = 'Hello world default text';
-$string['helloworld:defaultblockfooter'] = 'Hello world footer';
-$string['helloworld:headerconfig'] = 'Hello world global configuration';
-$string['helloworld:descconfig'] = 'Here is the global configuration of the hello world block';
-$string['helloworld:labelcoloredtext'] = 'Colored text ?';
-$string['helloworld:desccoloredtext'] = 'This will enabled a colored text for the block';
-$string['helloworld:typeatext'] = 'Type a text';
+$string['defaultblocktitle']='Hello world default title';
+
+//helloworld/edit_form.php
+$string['typeatext']='type a text';
+$string['titleinputlabel']='Block title';
+
+//helloworld/helloworld_form.php
+$string['mandatoryfields'] = 'Mandatory fields';
+$string['title'] = 'Message title';
+$string['displayedcontent'] = 'Displayed content';
+$string['files'] = 'Files';
+
+//helloworld/delete.php
+$string['deleteitem'] = 'Delete item \'{$a}\' ?';
+
+//helloworld/edit.php
+$string['helloworldsettings']='hello world settings';
+$string['editpage']='Edit page';
+
+//helloworld/settings.php
+$string['headerconfig']='Global configuration';
+$string['descconfig']='This config is only accesible by admin.';
+$string['labeltitle']='Block default title';
+$string['desctitle']='This field will be used as a global block title';
+$string['labelcoloredtext']='Colored text ?';
+$string['desccoloredtext']='This will enable colored text using \'colored-text\' css class';
