@@ -21,16 +21,31 @@
  * @author      benIT <benoit.works@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+//helloworld/block_helloworld.php
 $string['pluginname'] = 'hello world';
-$string['helloworld:addinstance'] = 'Ajouter un bloc hello world';
-$string['helloworld:myaddinstance'] = 'Ajouter un bloc hello world au dashboard';
-$string['helloworld:contentinputlabel'] = 'Contenu du bloc world';
-$string['helloworld:titleinputlabel'] = 'Titre du bloc world';
-$string['helloworld:defaultblocktitle'] = 'Titre par défaut du bloc world';
-$string['helloworld:defaultblocktext'] = 'Hello world texte par défaut';
-$string['helloworld:defaultblockfooter'] = 'Hello world footer';
-$string['helloworld:headerconfig'] = 'Configuration globale du bloc hello world';
-$string['helloworld:descconfig'] = 'Configuration globale du bloc hello world';
-$string['helloworld:labelcoloredtext'] = 'Texte coloré ?';
-$string['helloworld:desccoloredtext'] = 'Active un texte coloré pour le bloc hello world';
-$string['helloworld:typeatext'] = 'Saisir un texte';
+$string['defaultblocktitle']='Hello world Titre par défaut';
+
+//helloworld/edit_form.php
+$string['typeatext']='Saisir un texte';
+$string['titleinputlabel']='Titre du bloc';
+
+//helloworld/helloworld_form.php
+$string['mandatoryfields'] = 'Champs obligatoires';
+$string['title'] = 'Titre du message';
+$string['displayedcontent'] = 'Contenu affiché';
+$string['files'] = 'Fichiers';
+
+//helloworld/delete.php
+$string['deleteitem'] = 'Supprimer l\'élément \'{$a}\' ?';
+
+//helloworld/edit.php
+$string['helloworldsettings']='hello world réglages';
+$string['editpage']='Edition de la page';
+
+//helloworld/settings.php
+$string['headerconfig']='Configuration globale';
+$string['descconfig']='Cette configuration est accessible uniquement en admin';
+$string['labelcoloredtext']='Texte coloré ?';
+$string['desccoloredtext']='Active la coloration du text via la classe css \'colored-text\'';
+$string['labeltitle']='Titre du bloc';
+$string['desctitle']='Ce champ sera utilisé comme titre global pour ce bloc';

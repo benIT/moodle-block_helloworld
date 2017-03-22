@@ -15,7 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * configuration form of hello world block
+ * configuration form of hello world block. This configures the block itself, this is not the instance form.
+ * This is the configuration of the block itself, NOT the edit page of an hello world page instance.
  * @package     block
  * @subpackage  helloworld
  * @copyright   2017 benIT
@@ -27,17 +28,10 @@ class block_helloworld_edit_form extends block_edit_form
 
     protected function specific_definition($mform)
     {
-
-        // Section header title according to language file.
         $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
 
-        // A sample string variable with a default value.
-        $mform->addElement('text', 'config_text', get_string('helloworld:contentinputlabel', 'block_helloworld'));
-        $mform->setDefault('config_text', get_string('helloworld:typeatext', 'block_helloworld'));
-        $mform->setType('config_text', PARAM_RAW);
-
-        $mform->addElement('text', 'config_title', get_string('helloworld:titleinputlabel', 'block_helloworld'));
-        $mform->setDefault('config_title', get_string('helloworld:typeatext', 'block_helloworld'));
+        $mform->addElement('text', 'config_title', get_string('titleinputlabel', 'block_helloworld'));
+        $mform->setDefault('config_title', get_string('typeatext', 'block_helloworld'));
         $mform->setType('config_title', PARAM_TEXT);
 
     }

@@ -25,13 +25,19 @@
 
 $settings->add(new admin_setting_heading(
     'headerconfig',
-    get_string('helloworld:headerconfig', 'block_helloworld'),
-    get_string('helloworld:descconfig', 'block_helloworld')
+    get_string('headerconfig', 'block_helloworld'),
+    get_string('descconfig', 'block_helloworld')
 ));
+
+$settings->add(new admin_setting_configtext(
+    'helloworld/title',
+    get_string('labeltitle', 'block_helloworld'),
+    get_string('desctitle', 'block_helloworld'),
+    get_string('defaultblocktitle', 'block_helloworld')));
 
 $settings->add(new admin_setting_configcheckbox(
     'helloworld/Colored_Text',
-    get_string('helloworld:labelcoloredtext', 'block_helloworld'),
-    get_string('helloworld:desccoloredtext', 'block_helloworld'),
+    get_string('labelcoloredtext', 'block_helloworld'),
+    get_string('desccoloredtext', 'block_helloworld'),
     '0'
 ));

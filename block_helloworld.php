@@ -42,21 +42,64 @@ class block_helloworld extends block_base
      */
     public function get_content()
     {
+        global $COURSE, $DB, $PAGE;
+        $context = context_course::instance($COURSE->id);
+        // Check to see if we are in editing mode and that we can manage pages.
         if ($this->content !== NULL) {
-            return $this->content;
+            return $this->content->text;
         }
-        $this->content = new stdClass;
-        $this->content->text = $this->config->text ? $this->config->text : '<h4>'.get_string('helloworld:defaultblocktext','block_helloworld').'</h4>';
-        $this->content->footer = '<p><i>'.get_string('helloworld:defaultblockfooter','block_helloworld').'</i></p>';
-        return $this->content;
+        //here I choose to not filter on block blockid' => $this->instance->id, to display all informations to users
+        $helloworldpages = $DB->get_records('block_helloworld');
+        $this->content = new stdClass();
+        $this->content->text = '';
+        if (count($helloworldpages)) {
+            foreach ($helloworldpages as $helloworldpage) {
+                $this->content->text .= html_writer::start_tag('h2') . $helloworldpage->title . html_writer::end_tag('h2');
+                $this->content->text .= html_writer::start_tag('p') . $helloworldpage->text . html_writer::end_tag('p');
+                $context = context_course::instance($COURSE->id);
+                $fs = get_file_storage();
+//                var_dump($context); die ;
+                if ($files = $fs->get_area_files($context->id, 'block_helloworld', 'attachment', $helloworldpage->attachment, 'sortorder', false)) {
+                    foreach ($files as $file) {
+                        $fileurl = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(), $file->get_itemid(), $file->get_filepath(), $file->get_filename());
+                        $download_url = $fileurl->get_port() ? $fileurl->get_scheme() . '://' . $fileurl->get_host() . $fileurl->get_path() . ':' . $fileurl->get_port() : $fileurl->get_scheme() . '://' . $fileurl->get_host() . $fileurl->get_path();
+                        $this->content->text .= '<a href="' . $download_url . '">' . $file->get_filename() . '</a><br/>';
+                    }
+                }
+                $this->content->text .= $helloworldpage->date ? '<p><i>'. userdate($helloworldpage->date) .'</p></i>' : null;
+
+                if (has_capability('block/helloworld:managepages', $context)) {
+                    $pageparam = array('blockid' => $this->instance->id,
+                        'courseid' => $COURSE->id,
+                        'id' => $helloworldpage->id);
+                    $editurl = new moodle_url('/blocks/helloworld/edit.php', $pageparam);
+                    $editpicurl = new moodle_url('/pix/t/edit.png');
+                    $edit = html_writer::link($editurl, html_writer::tag('img', '', array('src' => $editpicurl, 'alt' => get_string('edit'))));
+                    //delete
+                    $deleteparam = array('id' => $helloworldpage->id, 'courseid' => $COURSE->id);
+                    $deleteurl = new moodle_url('/blocks/helloworld/delete.php', $deleteparam);
+                    $deletepicurl = new moodle_url('/pix/t/delete.png');
+                    $delete = html_writer::link($deleteurl, html_writer::tag('img', '', array('src' => $deletepicurl, 'alt' => get_string('delete'))));
+                    $this->content->text .= $edit;
+                    $this->content->text .= $delete;
+                }
+            }
+        } else {
+            $this->content->text .= html_writer::start_tag('p') . 'nothing to display yet' . html_writer::end_tag('p');
+        }
+        if (has_capability('block/helloworld:managepages', $context)) {
+            $url = new moodle_url('/blocks/helloworld/edit.php', array('blockid' => $this->instance->id, 'courseid' => $COURSE->id));
+            $add = new moodle_url('/pix/t/add.png');
+            $this->content->text .= '<br/><br/>' . html_writer::link($url, html_writer::tag('img', '', array('src' => $add, 'alt' => get_string('add'))));
+        }
+
+        return $this->content->text;
     }
 
     public function specialization()
     {
-        if ($this->config) {
-            //let's set up the block title
-            $this->title = $this->config->title ? $this->config->title : get_string('helloworld:defaultblocktitle', 'block_helloworld');
-        }
+        //let's set up the block title
+        $this->title = get_config('helloworld', 'title') ? get_config('helloworld', 'title') : get_string('defaultblocktitle', 'block_helloworld');
     }
 
     public function html_attributes()
@@ -70,7 +113,7 @@ class block_helloworld extends block_base
 
     public function instance_allow_multiple()
     {
-        return true;
+        return false;
     }
 
     public function has_config()
@@ -78,5 +121,10 @@ class block_helloworld extends block_base
         return true;
     }
 
+    public function instance_delete()
+    {
+        global $DB;
+        $DB->delete_records('block_helloworld', array('blockid' => $this->instance->id));
+    }
 
 }
