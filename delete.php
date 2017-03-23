@@ -25,12 +25,22 @@
 
 require_once('../../config.php');
 global $PAGE;
-$context = context_system::instance();
+$context = context_course::instance($COURSE->id);
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('standard');
 $courseid = required_param('courseid', PARAM_INT);
 $id = optional_param('id', 0, PARAM_INT);
 $confirm = optional_param('confirm', 0, PARAM_INT);
+
+$helloworldpage = $DB->get_record('block_helloworld', array('id' => $id));
+$fs = get_file_storage();
+$fileinfo = array(
+    'component' => 'block_helloworld',
+    'filearea' => 'attachment',     // usually = table name
+    'itemid' => $helloworldpage->attachment,               // usually = ID of row in table
+    'contextid' => $context->id, // ID of context
+    'filepath' => '/',           // any path beginning and ending in /
+    'filename' => ''); // any filename
 
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourse', 'block_helloworld', $courseid);
@@ -53,20 +63,15 @@ if (!$confirm) {
     if (confirm_sesskey()) {
         $helloworldpage = $DB->get_record('block_helloworld', array('id' => $id));
         $fs = get_file_storage();
-        $fileinfo = array(
-            'component' => 'block_helloworld',
-            'filearea' => 'attachment',     // usually = table name
-            'itemid' => $helloworldpage->attachment,               // usually = ID of row in table
-            'contextid' => $context->id, // ID of context
-            'filepath' => '/',           // any path beginning and ending in /
-            'filename' => ''); // any filename
-
-        // Get file
-        $file = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], $fileinfo['itemid'], $fileinfo['filepath'], $fileinfo['filename']);
-        if ($file) {
-            $file->delete();
-        }
-        if (!$DB->delete_records('block_helloworld', array('id' => $id))) {
+        $files = $fs->get_area_files($context->id, 'block_helloworld', 'attachment', $helloworldpage->attachment, 'sortorder', false);
+        if (count($files) === 1) {
+            $first = array_shift($files);
+            if ($first->delete()) {
+                if (!$DB->delete_records('block_helloworld', array('id' => $id))) {
+                    print_error('deleteerror', 'block_helloworld');
+                }
+            }
+        } else {
             print_error('deleteerror', 'block_helloworld');
         }
     } else {
