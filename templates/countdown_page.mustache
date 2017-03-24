@@ -1,0 +1,38 @@
+<div class="hero-unit">
+    <h1>Heading</h1>
+    <p>{{sometext}}</p>
+    <form>
+        <input id="countDownValue" value="60" type="number">
+    </form>
+    <button id="countDownButton">  countdown    </button>
+    <p id="countDown">p</p>
+
+</div>
+
+{{#js}}
+function startTimer(duration, display) {
+var timer = duration, minutes, seconds;
+setInterval(function () {
+minutes = parseInt(timer / 60, 10)
+seconds = parseInt(timer % 60, 10);
+
+minutes = minutes < 10 ? "0" + minutes : minutes;
+seconds = seconds < 10 ? "0" + seconds : seconds;
+
+display.textContent = minutes + ":" + seconds;
+
+if (--timer < 0) {
+timer = duration;
+}
+}, 1000);
+}
+
+document.getElementById("countDownButton").addEventListener("click", function(){
+    this.disabled=true;
+    var time=parseInt(document.getElementById("countDownValue").value,10);
+    startTimer(time,document.getElementById("countDown")) ;
+});
+
+
+
+{{/js}}
