@@ -1,38 +1,17 @@
+<h2>{{heading}}</h2>
 <div class="hero-unit">
-    <h1>Heading</h1>
-    <p>{{sometext}}</p>
-    <form>
-        <input id="countDownValue" value="60" type="number">
-    </form>
-    <button id="countDownButton">  countdown    </button>
-    <p id="countDown">p</p>
-
+    <p>{{descriptive}}</p>
+    <div id="countdown">
+        <div id='tiles'></div>
+        <div class="labels">
+            <!--<li>Days</li>-->
+            <li>Hours</li>
+            <li>Mins</li>
+            <li>Secs</li>
+        </div>
+        <br>
+        <br>
+        <p id="start-date">starting at </p>
+        <p>Countdown source available at : <a href="{{credit}}">Credit @Codepen</a></p>
+    </div>
 </div>
-
-{{#js}}
-function startTimer(duration, display) {
-var timer = duration, minutes, seconds;
-setInterval(function () {
-minutes = parseInt(timer / 60, 10)
-seconds = parseInt(timer % 60, 10);
-
-minutes = minutes < 10 ? "0" + minutes : minutes;
-seconds = seconds < 10 ? "0" + seconds : seconds;
-
-display.textContent = minutes + ":" + seconds;
-
-if (--timer < 0) {
-timer = duration;
-}
-}, 1000);
-}
-
-document.getElementById("countDownButton").addEventListener("click", function(){
-    this.disabled=true;
-    var time=parseInt(document.getElementById("countDownValue").value,10);
-    startTimer(time,document.getElementById("countDown")) ;
-});
-
-
-
-{{/js}}
