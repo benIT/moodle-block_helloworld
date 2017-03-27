@@ -39,13 +39,21 @@ class block_helloworld_renderer extends plugin_renderer_base
         $data = $page->export_for_template($this);
         return parent::render_from_template('block_helloworld/countdown_page', $data);
     }
+
+    public function render_gettoken_page($page)
+    {
+        $data = $page->export_for_template($this);
+        return parent::render_from_template('block_helloworld/gettoken_page', $data);
+    }
 }
 
-class countdown_page implements renderable, templatable {
+trait renderer_page_trait
+{
     /** @var stdClass data to a template. */
     private $data;
 
-    public function __construct($data) {
+    public function __construct($data)
+    {
         $this->data = $data;
     }
 
@@ -54,8 +62,21 @@ class countdown_page implements renderable, templatable {
      *
      * @return stdClass
      */
-    public function export_for_template(renderer_base $output) {
+    public function export_for_template(renderer_base $output)
+    {
         $data = new stdClass();
         return $this->data;
     }
+
+}
+
+class countdown_page implements renderable, templatable
+{
+    use renderer_page_trait;
+}
+
+
+class gettoken_page implements renderable, templatable
+{
+    use renderer_page_trait;
 }

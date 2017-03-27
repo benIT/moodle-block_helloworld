@@ -1,0 +1,23 @@
+<div class="hero-unit">
+    <h2>{{heading}}</h2>
+    <p>{{descriptive}}</p>
+    <form>
+        <label for="user">User</label>
+        <input id="user" type="text">
+        <label for="password">Password</label>
+        <input id="password" type="text">
+        <label for="token">Token</label>
+        <input id="token" type="text" readonly>
+        <label for="service">Service</label>
+        <select id="service">
+            <option value="moodle_mobile_app">Moodle mobile app</option>
+            <option value="test_ws">Test ws</option>
+        </select>
+        <label for="gettoken"></label>
+        <input class="btn-primary" readonly id="gettoken" type="submit" value="Get token">
+        <div class="loader">
+            <img src="/blocks/helloworld/js/loader.gif" alt="" id="loader">
+        </div>
+        <div id="info"></div>
+    </form>
+</div>
