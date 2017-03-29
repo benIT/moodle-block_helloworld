@@ -25,18 +25,20 @@ require_once(__DIR__ . '/../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
 
 // Set up the page.
+$context = context_system::instance();
+$PAGE->set_context( $context );
 $title = get_string('pluginname', 'block_helloworld');
 $PAGE->requires->js('/blocks/helloworld/js/jquery-3.2.0.min.js', true); //loaded in begining
 $PAGE->requires->js('/blocks/helloworld/js/gettoken.js', false); //loaded at the end
-$PAGE->set_pagelayout("standart");
+$PAGE->set_pagelayout("standard");
 $pagetitle = $title;
 $url = new moodle_url("/blocks/helloworld/countdown.php");
 $PAGE->set_url($url);
 $PAGE->set_title($title);
+
 $output = $PAGE->get_renderer('block_helloworld');
-//var_dump($output); die ;
 echo $output->header();
-echo $output->heading();
+echo $output->heading("");
 $data = new stdClass();
 $data->heading = 'Webservice - Get token page';
 $data->descriptive = 'Use this form to get a webservice token.';
