@@ -26,16 +26,18 @@ require_once($CFG->libdir . '/adminlib.php');
 
 // Set up the page.
 $title = get_string('pluginname', 'block_helloworld');
+$PAGE->set_context(context_system::instance()) ;
 $PAGE->requires->js('/blocks/helloworld/js/jquery-3.2.0.min.js', true); //loaded in begining
 $PAGE->requires->js('/blocks/helloworld/js/countdown.js', false); //loaded at the end
-$PAGE->set_pagelayout("standart");
+$PAGE->set_pagelayout("standard");
+$PAGE->set_pagelayout("standard");
 $pagetitle = $title;
 $url = new moodle_url("/blocks/helloworld/countdown.php");
 $PAGE->set_url($url);
 $PAGE->set_title($title);
 $output = $PAGE->get_renderer('block_helloworld');
 echo $output->header();
-echo $output->heading();
+echo $output->heading("");
 $data = new stdClass();
 $data->heading = 'Countdown page';
 $data->descriptive = 'This countdown uses external javascript and a mustache template.';
